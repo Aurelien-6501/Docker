@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+
+  vue:
+    build: 
+      context: ./front
+    ports:
+      - "8080:80"
+    #image: front_image:1.0.0
+    container_name: front_api_container
+    environment:
+      - VITE_GRAPHQL_URL=http://api:8081/graphql
+    env_file:
+      - ./front/.env
+    networks:
+      - network_api_graphql
+    depends_on:
+      - api
+    volumes:
+      - front_data:/app/front/data
+
+  api:
+    build: 
+      context: ./back
+    ports:
+      - "8081:8081"
+    #image: apigraphql_image:1.0.0
+    container_name: graphql_api_container
+    networks:
+      - network_api_graphql
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_URL: mongodb://mongodb:27017/demographql
+    env_file:
+      - ./back/.env
+    volumes:
+      - api_data:/app/data
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    networks:
+      - network_api_graphql
+    environment:
+      MONGO_INITDB_DATABASE: demographql
+      # MONGO_INITDB_ROOT_USERNAME: root
+      # MONGO_INITDB_ROOT_PASSWORD: mypass
+    volumes:
+      - mongodb_data:/data/db
+
+
+
+networks:
+  network_api_graphql:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+  api_data:
+  front_data:
