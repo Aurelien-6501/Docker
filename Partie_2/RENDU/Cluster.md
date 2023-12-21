@@ -20,3 +20,15 @@ La scalabilty c'est la capacité à gerer efficacement le nombre d'instances d'u
 Availabilty
 
 Le principe de disponibilité sur Docker c'est d'assurer la disponibilité continue des applications déployées dans des conteneurs, même en cas de défaillances matérielles ou logicielles. Docker permet la gestion des services et l'utilisation d'outils d'orchestration comme Kubernetes.
+
+load balancing
+
+distribuer les charges de travail entre différent serveurs ou applications. C'est optimiser les performances 
+
+La clusterisation peut résoudre ces problèmes car elle permet de construire des systèmes distribués, capables de s'adapter dynamiquement aux variations de charge, de supporter les pannes et garantir la disponibilité des services. C'est pourquoi elle est utilisée dans des environnements tels que Kubernetes, Docker Swarm.
+
+
+
+
+
+
